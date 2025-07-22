@@ -1,0 +1,55 @@
+Funciones del contrato GroupSavings (groupsavings):
+---------------------------------------------------
+1. register_group(ref self: ContractState, group_id: felt252, name: felt252, members: Array<felt252>)
+   - Registra un nuevo grupo de ahorro con id, nombre y miembros.
+
+2. save(ref self: ContractState, group_id: felt252, member: felt252, amount: felt252)
+   - Permite a un miembro depositar ahorro en su grupo.
+
+3. get_group_total(self: @ContractState, group_id: felt252) -> felt252
+   - Devuelve el total ahorrado por el grupo.
+
+4. get_member_savings(self: @ContractState, group_id: felt252, member: felt252) -> felt252
+   - Devuelve el ahorro de un miembro en el grupo.
+
+5. get_group_member(self: @ContractState, group_id: felt252, index: u32) -> felt252
+   - Devuelve el id de un miembro del grupo según su índice.
+
+6. get_group_size(self: @ContractState, group_id: felt252) -> u32
+   - Devuelve la cantidad de miembros del grupo.
+
+
+Funciones del contrato YieldManager (yieldmanager):
+---------------------------------------------------
+1. constructor(ref self: ContractState, admin: ContractAddress)
+   - Inicializa el contrato con el admin y contador de usuarios.
+
+2. deposit(ref self: ContractState, from: ContractAddress, user: felt252, amount: u256)
+   - Permite a un contrato autorizado depositar fondos para un usuario.
+
+3. update_strategy(ref self: ContractState, new_strategy: ContractAddress)
+   - Permite al admin actualizar la estrategia de inversión.
+
+4. distribute_yield(ref self: ContractState)
+   - Distribuye el yield (5%) a todos los usuarios, sumando bonos y restando penalizaciones.
+
+5. get_user_balance(self: @ContractState, user: felt252) -> u256
+   - Devuelve el balance actual de un usuario.
+
+6. get_strategy(self: @ContractState) -> ContractAddress
+   - Devuelve la dirección de la estrategia actual.
+
+7. get_user_yield(self: @ContractState, user: felt252) -> u256
+   - Devuelve el yield acumulado de un usuario.
+
+8. set_authorized_caller(ref self: ContractState, contract: ContractAddress, is_auth: bool)
+   - Permite al admin autorizar o desautorizar contratos para depositar.
+
+9. set_penalty(ref self: ContractState, user: felt252, amount: u256)
+   - Permite al admin asignar una penalización a un usuario.
+
+10. set_bonus(ref self: ContractState, user: felt252, amount: u256)
+    - Permite al admin asignar un bono a un usuario.
+
+11. set_admin_for_test(ref self: ContractState, new_admin: ContractAddress)
+    - Solo para testing: permite cambiar el admin en los tests. 
